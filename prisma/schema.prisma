@@ -17,3 +17,9 @@ model DivingCenter {
   locationLatitude  Float
   locationLongitude Float
 }
+
+model Fish {
+  id    String  @id @default(uuid())
+  name  String
+  image String?
+}

@@ -33,7 +33,42 @@ async function seed() {
                 "locationLongitude": 99.8274
             }
         ]
-    })
+    });
+
+    // Diving Centers
+    await prisma.fish.deleteMany({});
+    await prisma.fish.createMany({
+        data: [
+            {
+                "name": "Titan triggerfish",
+                "image": "https://example.com/titan_triggerfish.jpg"
+            },
+            {
+                "name": "Blotched porcupine pufferfish",
+                "image": "https://example.com/blotched_pufferfish.jpg"
+            },
+            {
+                "name": "Common lionfish",
+                "image": "https://example.com/lionfish.jpg"
+            },
+            {
+                "name": "Orange-spine unicornfish",
+                "image": "https://example.com/orange_spine_unicornfish.jpg"
+            },
+            {
+                "name": "Butterflyfish (e.g. Lined Butterflyfish)",
+                "image": "https://example.com/butterflyfish.jpg"
+            },
+            {
+                "name": "Chevron barracuda",
+                "image": "https://example.com/chevron_barracuda.jpg"
+            },
+            {
+                "name": "White-eyed moray eel",
+                "image": "https://example.com/white_eyed_moray.jpg"
+            }
+        ]
+    });
 
 }
 
