@@ -1,6 +1,7 @@
 import express from 'express';
 import {getAllDivingCenters} from './services/divingCenterService';
 import {getAllFish, getFishById} from './services/fishService';
+import {startFishSightingUpdates} from './services/fishSightingService';
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.get('/api/fish/:id', async (req, res) => {
     }
 });
 
-const server = app.listen(3000, () =>
-    console.log("🚀 Server ready at: http://localhost:3000")
-)
+const server = app.listen(3000, () => {
+    console.log("🤿 FishyDex available at http://localhost:3000");
+    startFishSightingUpdates();
+});
