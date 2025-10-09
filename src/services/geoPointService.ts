@@ -8,7 +8,7 @@ import destination from "@turf/destination";
  * - radiusKm: circle radius in kilometers
  * Returns: { lat, lon }
  */
-export function randomPointInCircleTurf() {
+export function randomPointInCircle() {
     const bearing = Math.random() * 360;
     const distanceKm = DIVING_AREA_RADIUS * Math.sqrt(Math.random());
 

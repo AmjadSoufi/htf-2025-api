@@ -1,4 +1,5 @@
 import {PrismaClient} from "../src/generated/prisma";
+import {randomPointInCircle} from "../src/services/geoPointService";
 
 const prisma = new PrismaClient();
 
@@ -72,9 +73,27 @@ async function seed() {
     });
 
     // Fish Sightings
-    fish.forEach(fish => {
+    await prisma.fishSighting.deleteMany({});
 
-    });
+    for (const f of fish) {
+        const sightings = [];
+        for (let i = 0; i < 10; i++) {
+            const location = randomPointInCircle();
+            // Last event (i=9) is current time, each previous event is 5 minutes earlier
+            const minutesAgo = (9 - i) * 5;
+            const timestamp = new Date(Date.now() - minutesAgo * 60 * 1000);
+
+            sightings.push({
+                fishId: f.id,
+                latitude: location.lat,
+                longitude: location.lon,
+                timestamp: timestamp
+            });
+        }
+        await prisma.fishSighting.createMany({
+            data: sightings
+        });
+    }
 
 }
 
