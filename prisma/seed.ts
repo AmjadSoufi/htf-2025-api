@@ -8,40 +8,41 @@ async function seed() {
     await prisma.divingCenter.createMany({
         data: [
             {
-                "name": "Master Divers",
-                "latitude": 10.0927,
-                "longitude": 99.8366
+                "name": "La Bombona Diving",
+                "longitude": 99.82786494391709,
+                "latitude": 10.09949848404374
             },
             {
-                "name": "The Divers Boat",
-                "latitude": 10.0987,
-                "longitude": 99.8250
+                "name": "Coral Grand Divers",
+                "longitude": 99.82705089619611,
+                "latitude": 10.103286921162093,
             },
             {
-                "name": "IDC Koh Tao",
-                "latitude": 10.1009,
-                "longitude": 99.8263
+                "name": "Scuba Birds",
+                "longitude": 99.8225499878697,
+                "latitude": 10.08176692114223,
             },
             {
                 "name": "Sairee Cottage Diving",
-                "latitude": 10.0981,
-                "longitude": 99.8302
+                "longitude": 99.82832599207734,
+                "latitude": 10.097139068851266
             },
             {
-                "name": "Big Blue Diving",
-                "latitude": 10.0965,
-                "longitude": 99.8274
+                "name": "Mojo Diver",
+                "longitude": 99.82729089627196,
+                "latitude": 10.10268799673875
             }
         ]
     });
 
     // Diving Centers
     await prisma.fish.deleteMany({});
-    await prisma.fish.createMany({
+
+    const fish = await prisma.fish.createManyAndReturn({
         data: [
             {
                 "name": "Titan triggerfish",
-                "image": "https://example.com/titan_triggerfish.jpg"
+                "image": "https://example.com/titan_triggerfish.jpg",
             },
             {
                 "name": "Blotched porcupine pufferfish",
@@ -68,6 +69,11 @@ async function seed() {
                 "image": "https://example.com/white_eyed_moray.jpg"
             }
         ]
+    });
+
+    // Fish Sightings
+    fish.forEach(fish => {
+
     });
 
 }

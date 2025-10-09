@@ -16,7 +16,6 @@ model DivingCenter {
   name      String
   latitude  Float
   longitude Float
-  sightings FishSighting[]
 }
 
 model Fish {
@@ -27,12 +26,10 @@ model Fish {
 }
 
 model FishSighting {
-  id             String       @id @default(uuid())
-  fishId         String
-  fish           Fish         @relation(fields: [fishId], references: [id])
-  divingCenterId String
-  divingCenter   DivingCenter @relation(fields: [divingCenterId], references: [id])
-  latitude       Float
-  longitude      Float
-  timestamp      DateTime     @default(now())
+  id        String   @id @default(uuid())
+  fishId    String
+  fish      Fish     @relation(fields: [fishId], references: [id])
+  latitude  Float
+  longitude Float
+  timestamp DateTime @default(now())
 }
