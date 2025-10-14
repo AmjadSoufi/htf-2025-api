@@ -14,14 +14,21 @@ export const getAllFish = async () => {
         }
     });
 
-    return fish.map(({sightings, ...f}) => ({
-        ...f,
-        latestSighting: sightings[0] || null
-    }));
+    return fish.map(({sightings, ...f}) => {
+        const sighting = sightings[0];
+        return {
+            ...f,
+            latestSighting: sighting ? {
+                latitude: sighting.latitude,
+                longitude: sighting.longitude,
+                timestamp: sighting.timestamp
+            } : null
+        };
+    });
 };
 
 export const getFishById = async (id: string) => {
-    return prisma.fish.findUnique({
+    const fish = await prisma.fish.findUnique({
         where: {
             id
         },
@@ -29,4 +36,17 @@ export const getFishById = async (id: string) => {
             sightings: true
         }
     });
+
+    if (!fish) {
+        return null;
+    }
+
+    return {
+        ...fish,
+        sightings: fish.sightings.map(sighting => ({
+            latitude: sighting.latitude,
+            longitude: sighting.longitude,
+            timestamp: sighting.timestamp
+        }))
+    };
 };

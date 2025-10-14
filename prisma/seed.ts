@@ -1,5 +1,6 @@
-import {PrismaClient} from "../src/generated/prisma";
+import {$Enums, PrismaClient} from "../src/generated/prisma";
 import {randomPointInCircle} from "../src/services/geoPointService";
+import FishRarity = $Enums.FishRarity;
 
 const prisma = new PrismaClient();
 
@@ -45,30 +46,52 @@ async function seed() {
             {
                 "name": "Titan triggerfish",
                 "image": "https://example.com/titan_triggerfish.jpg",
+                "rarity": FishRarity.COMMON
             },
             {
                 "name": "Blotched porcupine pufferfish",
-                "image": "https://example.com/blotched_pufferfish.jpg"
+                "image": "https://example.com/blotched_pufferfish.jpg",
+                "rarity": FishRarity.COMMON
             },
             {
                 "name": "Common lionfish",
-                "image": "https://example.com/lionfish.jpg"
+                "image": "https://example.com/lionfish.jpg",
+                "rarity": FishRarity.COMMON
             },
             {
                 "name": "Orange-spine unicornfish",
-                "image": "https://example.com/orange_spine_unicornfish.jpg"
+                "image": "https://example.com/orange_spine_unicornfish.jpg",
+                "rarity": FishRarity.COMMON
             },
             {
                 "name": "Butterflyfish (e.g. Lined Butterflyfish)",
-                "image": "https://example.com/butterflyfish.jpg"
+                "image": "https://example.com/butterflyfish.jpg",
+                "rarity": FishRarity.COMMON
             },
             {
                 "name": "Chevron barracuda",
-                "image": "https://example.com/chevron_barracuda.jpg"
+                "image": "https://example.com/chevron_barracuda.jpg",
+                "rarity": FishRarity.COMMON
             },
             {
                 "name": "White-eyed moray eel",
-                "image": "https://example.com/white_eyed_moray.jpg"
+                "image": "https://example.com/white_eyed_moray.jpg",
+                "rarity": FishRarity.COMMON
+            },
+            {
+                "name": "Pink Tail Triggerfish",
+                "image": "https://example.com/white_eyed_moray.jpg",
+                "rarity": FishRarity.RARE
+            },
+            {
+                "name": "Seahorse",
+                "image": "https://example.com/white_eyed_moray.jpg",
+                "rarity": FishRarity.RARE
+            },
+            {
+                "name": "Broadbanded Moray",
+                "image": "https://example.com/white_eyed_moray.jpg",
+                "rarity": FishRarity.RARE
             }
         ]
     });

@@ -22,6 +22,7 @@ model Fish {
   id        String         @id @default(uuid())
   name      String
   image     String?
+  rarity FishRarity?
   sightings FishSighting[]
 }
 
@@ -32,4 +33,9 @@ model FishSighting {
   latitude  Float
   longitude Float
   timestamp DateTime @default(now())
+}
+
+enum FishRarity {
+  COMMON
+  RARE
 }
