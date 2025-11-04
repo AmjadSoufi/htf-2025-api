@@ -47,7 +47,6 @@ app.get('/api/fish/:id', async (req, res) => {
 app.get('/api/temperatures', async (req, res) => {
     try {
         const temperatures = await getAllTemperatureReadings();
-        console.log(temperatures)
         res.json(temperatures);
     } catch (error) {
         console.error('Error fetching temperatures:', error);
