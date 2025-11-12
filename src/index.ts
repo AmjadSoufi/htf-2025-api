@@ -9,10 +9,17 @@
 
 import express from "express";
 import cors from "cors";
-import {getAllDivingCenters} from "./services/divingCenterService";
-import {getAllFish, getFishById} from "./services/fishService";
-import {getAllTemperatureReadings, getTemperatureReadingsForSensorId} from "./services/temperatureReadingService";
-import {startFishSightingUpdates, startTemperatureSensorUpdates,} from "./services/scheduledJobService";
+import { getAllDivingCenters } from "./services/divingCenterService";
+import { getAllFish, getFishById } from "./services/fishService";
+import {
+  getAllTemperatureReadings,
+  getTemperatureReadingsForSensorId,
+} from "./services/temperatureReadingService";
+import { getTemperatureReadingsInRange } from "./services/temperatureReadingService";
+import {
+  startFishSightingUpdates,
+  startTemperatureSensorUpdates,
+} from "./services/scheduledJobService";
 
 // Initialize Express application
 const app = express();
@@ -99,15 +106,36 @@ app.get("/api/temperatures", async (req, res) => {
  */
 app.get("/api/temperatures/:id", async (req, res) => {
   try {
-    const temperatureSensor = await getTemperatureReadingsForSensorId(req.params.id);
+    const temperatureSensor = await getTemperatureReadingsForSensorId(
+      req.params.id
+    );
     if (!temperatureSensor) {
-      res.status(404).json({error: "Temperature sensor not found"});
+      res.status(404).json({ error: "Temperature sensor not found" });
       return;
     }
     res.json(temperatureSensor);
   } catch (error) {
     console.error("Error fetching temperature sensor by id:", error);
-    res.status(500).json({error: "Failed to fetch temperature sensor"});
+    res.status(500).json({ error: "Failed to fetch temperature sensor" });
+  }
+});
+
+/**
+ * GET /api/temperatures/history
+ * Optional query params: start (ISO), end (ISO)
+ * Returns flattened temperature readings across sensors in the requested time range.
+ */
+app.get("/api/temperatures/history", async (req, res) => {
+  try {
+    const start = req.query.start
+      ? new Date(String(req.query.start))
+      : undefined;
+    const end = req.query.end ? new Date(String(req.query.end)) : undefined;
+    const data = await getTemperatureReadingsInRange(start, end);
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching temperature history:", error);
+    res.status(500).json({ error: "Failed to fetch temperature history" });
   }
 });
 
