@@ -23,6 +23,9 @@ model Fish {
   name      String
   image     String?
   rarity FishRarity?
+  // typical size (cm) and weight (kg) for display in the client
+  sizeCm    Int?
+  weightKg  Float?
   sightings FishSighting[]
 }
 

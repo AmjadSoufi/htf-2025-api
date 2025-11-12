@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Fish" ADD COLUMN "sizeCm" INTEGER;
+ALTER TABLE "Fish" ADD COLUMN "weightKg" REAL;
